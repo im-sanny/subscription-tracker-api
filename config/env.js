@@ -11,4 +11,3 @@ export const {
   ARCJET_ENV,
   ARCJET_KEY,
 } = process.env;
-
