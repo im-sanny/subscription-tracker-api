@@ -19,3 +19,8 @@ export const sendReminders = serve(async (c) => {
   }
 });
 
+const fetchSubscription = async (c, subscriptionId) => {
+  return await c.run('get subscription', () => {
+    return Subscription.findById(subscriptionId).populate('user', 'name email');
+  });
+};
