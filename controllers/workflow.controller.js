@@ -25,7 +25,6 @@ export const sendReminders = serve(async (c) => {
     const reminderDate = renewalDate.subtract(daysBefore, 'day');
 
     if (reminderDate.isAfter(dayjs())) {
-      
     }
   }
 });
@@ -33,5 +32,17 @@ export const sendReminders = serve(async (c) => {
 const fetchSubscription = async (c, subscriptionId) => {
   return await c.run('get subscription', () => {
     return Subscription.findById(subscriptionId).populate('user', 'name email');
+  });
+};
+
+const sleepUntilReminder = async (context, label, date) => {
+  console.log(`Sleeping until ${label} reminder at ${date}`);
+  await context.sleepUntil(label, data.toDate());
+};
+
+const triggerReminder = async (context, label) => {
+  return await context.run(label, () => {
+    console.log(`Triggering ${label} reminder`);
+    //send emails, sms, push notification....
   });
 };
